@@ -1,0 +1,190 @@
+
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+            
+
+
+            
+            <div class="d-flex bg-info mb-5 sticky-top" id="sidebar">
+                <div class="p-2 sticky-top" id="left_side_content" style="overflow: scroll;">
+                  <a href="./gameplay"><h5> <u>Categories</u> </h5> </a>
+                  <br>
+                  <% if(categories_list){
+                    categories_list.forEach(function(cat){ %>
+                      <li><%= cat %></li>
+                    <% });
+                  } %>
+    
+                </div>
+                <div class="container-fluid" style="padding: 2%; width: 70%;">
+                  <% if(!session.username){ %>
+                    <div class="row">
+                      <div class="col-3"></div>
+                      <div class="col-6">
+                        <div class="conainer" id="log_out_warn">
+                          <h3>Notice: You are not logged in.</h3>
+                          <h4>The leaderboard will not be updated.</h4>
+                        </div>
+                      </div>
+                    </div>
+
+                  <%} %>
+                  <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6" id="cat_col">
+                      <div class="container">
+                        <form action="/get_cat" method="post">
+                          <div class="form-group">
+                            <label for="catSelect"><h5>Select Category:</h5></label>
+                            <select class="form-control" id="catSelect" name="catSelect">
+                              <%if(session.category){ %>
+                                <option><%=session.category%></option>
+
+
+                              <%}%>
+                              <% if(categories_list){
+                                categories_list.forEach(function(cat){ %>
+                                  <option><%= cat %></option>
+                                <% });
+                              } %>
+                              <option>Random</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="difSelect"><h5>Select Difficulty:</h5></label>
+                            <select class="form-control" id="difSelect" name="difSelect">
+                              <% if(session.difficulty) {%>
+
+                                <option><%=session.difficulty%></option>
+                              <%}%>
+                              <option>easy</option>
+                              <option>medium</option>
+                              <option>hard</option>
+                              <option>random</option>
+                            </select>
+                          </div>
+                          <input class="btn btn-dark" type="submit" name="Submit" value="Submit">
+                        </form>
+                      </div>
+                    </div>
+                    <div class="col-1"></div>
+                  </div>
+                  <% if(items){ %>
+                    <div class="row" id="question_row">
+                      <div class="col-8">
+                        <br> 
+                        <p id="question"><%= items[0].question %></p>
+                        <div class="container" id="q_container">
+                          <div class="row" id="selection_row">
+                            <form action="/get_ans" method="post">
+                              <% if(items[0].type == 'boolean'){ %>                              
+                                <div class="grid-container" id="tf_grid">
+                                  <div class="grid-item">
+                                    <input type="radio" id="true" name="answer" value="True">
+                                    <label for="true">True</label>
+                                  </div>
+                                  <div class="grid-item">
+                                    <input type="radio" id="false" name="answer" value="False">
+                                    <label for="true">False</label>
+                                  </div>
+                                </div>
+                              <% } 
+                                else{ %>
+                                  <div class="grid-container" id="mc_grid">
+                                    <% 
+                                      var counter = 1;
+                                      responses.forEach(function(answer){ 
+                                        var idName = 'answer' + counter;
+                                    %>
+                                      <div class="grid-item">
+                                        <input type="radio" id="<%= idName %>" name="answer" value="<%= answer %>">
+                                        <label for="answer"><%= answer %></label>
+                                      </div>
+                                    <% 
+                                      counter++;
+                                      }); %>
+                                  </div>
+                                <% } %>
+                                <input class="btn btn-dark" type="submit" name="Submit" value="Submit">
+                            </form>
+                          </div> 
+                        </div>
+                      </div>
+                    </div>
+                  <% } %>
+                   <!-- after submit this will pop up based on if the answer is right or wrong-->
+    <% if(popup){ %>
+      <div class="row"  id="question_row">
+        <div class="col-8" id="question_box">
+          <!-- show the first card if answer is right-->
+            <% if(popup == 'right'){ %>
+              <div class="right">
+                <h2>Correct</h2>
+                <div class="back" style="width: 50%;">
+                  <div class="cent" style="text-align: center;">
+                    <h4>Keep it up, <%= session.firstname %>!</h4>
+                    <img src="../resources/images/chuck.gif" alt="#" style="width:80%">
+                    <!-- Button to move on to the next question. -->
+                    <div>
+                      <form action="/gameplay" method="get">
+                        <input class="btn btn-dark" type="submit" name="Submit" value="Continue">
+                        </form>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            <%  }
+            else{ %>
+              <!-- show the second card if answer is wrong -->
+            <div class="wrong">
+              <h2>Wrong Answer</h2>
+              <div class="back" style="width: 50%;">
+                <div class="cent" style="text-align: center;">
+                  <h4>Sorry <%= session.firstname %></h4>
+                  <h4>Better luck next time!</h4>
+                  <img src="../resources/images/feud.gif" alt="#" style="width:80%">
+                  <!-- Button to move on to the next question. -->
+                    <div>
+                      <form action="/gameplay" method="get">
+                        <input class="btn btn-dark" type="submit" name="Submit" value="Continue">
+                        </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+        </div>
+      </div>
+          <% } %>
+      </div>
+      
+                         <!--right side bar, describing leaderboard-->
+               
+                         <div class="ml-auto p-2" id="right_side_content">
+                  <a href="./leaderboard"><h5> <u>Leaderboard</u> </h5> </a>
+                  <table class="table table-bordered" id="stats_table">
+                    <tr>
+                      <th class="text-center">Rank</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Score</th>
+                    </tr>
+                     <%
+                     if (data) {
+                       var rows = '';
+                       var rank = 1; 
+                       data.forEach(function(item){
+                         rows += '<tr><td>' + rank +'</td><td>' + item.user_name + '</td><td>' + item.score + '</td></tr>';
+                         rank++;
+                       });
+                       %>
+                       <%- rows %>
+                     <% } %>
+                  </table>
+                 
+                </div>
+              </div>
+
+
+
+<%- include('../partials/footer') %>	

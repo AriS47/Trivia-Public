@@ -1,0 +1,158 @@
+
+
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+            
+
+
+            <!--This is the Left home page bar, descripting the categories-->
+
+            <div class="d-flex bg-info mb-5 sticky-top" id="sidebar">
+            
+              <div class="p-2 sticky-top" id="left_side_content" style="overflow: scroll;">
+                <a href="./gameplay"><h5> <u>Categories</u> </h5> </a>
+                <br>
+                
+                <% if(categories_list){
+                  categories_list.forEach(function(cat){ %>
+                    <li><%= cat %></li>
+                  <% });
+                } %>
+                
+              </div>
+
+
+            
+            
+            <!--This is the beginning to the categories Carousel-->
+
+
+            
+            <div class="container-fluid" id="carousel_container">
+              <div class="header_name">
+                  <h1><u>Welcome to Triviago<%if(!session.firstname) { %>!</u><%}else{%> <%=session.firstname%>! </u>
+                   <% }%> 
+                    </h1>
+
+                  <br><br>
+                  <p>Presented by group 17-1</p>
+                  <br><br>
+
+                  <h3> <u>Recommended Categories</u> </h3>
+                  <br>
+          
+              </div>
+          
+             
+             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              
+              <!--First category of carousel-->
+
+
+              <div class="carousel-inner">
+                <div class="carousel-item active" id="first_carousel_cat">
+                      <h3>Film</h3>          
+                      <a href="">
+                        <a href=""><img class="d-block w-100" src="http://33.media.tumblr.com/cfc3bf5d227ee7ca3724fce713ecce0b/tumblr_mk7hwyxRdt1s60bsco1_500.gif" alt="First slide" id="first_cat">
+                          <div class="card-img-overlay" id="first_over">
+                              <h2 class="card-title">Film</h2>
+                              <p class="card-text">Details Here</p>
+          
+                            </div>
+                      </a>
+                  </div>
+
+
+                  <!--Second category of carousel-->
+
+
+                  <div class="carousel-item" id="second_carousel_cat">
+                      <h3>Sports</h3>  
+                      <a href="">
+                        <img class="d-block w-100" src="https://cdn.vox-cdn.com/thumbor/hmV7tuQDoQXifq1GncrF6Vgkup0=/1000x0/filters:no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/6113579/Rakell_goal.0.gif" alt="Second slide" id="second_cat">
+                          <div class="card-img-overlay" id="second_over">
+                              
+                            <h2 class="card-title">Sports</h2>
+                            <p class="card-text">Details Here</p>
+          
+                            </div>
+                  </a>
+                  </div>
+
+                  <!--Third category of carousel-->
+
+
+                  <div class="carousel-item" id="third_carousel_cat">
+                      <h3>Video Games</h3>  
+                      <a href=""><img class="d-block w-100" src="https://64.media.tumblr.com/fbeaedb718f8f4c23d261b100bbf62cc/tumblr_onv6j3by9b1uql2i0o1_500.gifv" alt="Third slide" id="third_cat">
+                          <div class="card-img-overlay" id="third_over">
+                              
+                            <h2 class="card-title">Video Games</h2>
+                            <p class="card-text">Details Here</p>
+          
+                            </div>
+                      </a>
+                  </div>
+
+                  
+              </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                  </a>
+            </div>
+          <br><br>
+          <br><br>
+          <br><br>
+          </div>
+
+
+
+
+          
+
+
+          <!--right side bar, describing leaderboard-->
+
+          <div class="ml-auto p-2" id="right_side_content">
+                  <a href="./leaderboard"><h5> <u>Leaderboard</u> </h5> </a>
+                  <table class="table table-bordered" id="stats_table">
+                    <tr>
+                      <th class="text-center">Rank</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Score</th>
+                    </tr>
+                     <%
+                     if (data) {
+                       var rows = '';
+                       var rank = 1; 
+                       data.forEach(function(item){
+                         rows += '<tr><td>' + rank +'</td><td>' + item.user_name + '</td><td>' + item.score + '</td></tr>';
+                         rank++;
+                       });
+                       %>
+                       <%- rows %>
+                     <% } %>
+                  </table>
+                 
+                </div>
+          </div>
+          
+
+
+
+
+
+            
+
+            <%- include('../partials/footer') %>	

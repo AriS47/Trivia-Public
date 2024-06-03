@@ -1,0 +1,129 @@
+
+
+  .header_name{
+    text-align: center;
+    padding-top: 0;
+}
+
+
+.projects_container{
+  background-color: pink;
+  color: pink;
+  border-radius: 2px solid black;
+}
+
+/* .carousel-inner{
+  
+} */
+
+#carousel_container{
+  padding-top: 50px;
+  height: auto;
+
+  width: 70%;
+
+  position: sticky;
+  border-radius: 2px black;
+
+}
+
+
+
+
+#carouselExampleIndicators{
+  background-color: transparent;
+  
+  color: white;
+}
+
+#first_carousel_cat{
+  height: 450px;
+  text-align: center;
+  
+
+}
+
+
+#second_carousel_cat{
+  height: 450px;
+  text-align: center;
+}
+
+#third_carousel_cat{
+  height: 450px;
+  text-align: center;
+}
+
+
+#first_over{
+  padding-top: 100px;
+  height: 50%;
+  text-align: center;
+  color: transparent;
+}
+
+#first_over:hover{
+  color: black;
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+  background-color: silver;
+  opacity: .8;
+  padding-top: 100px;
+  height: 60%;
+  text-align: center;
+}
+
+
+
+#second_over{
+  padding-top: 100px;
+  height: 50%;
+  text-align: center;
+  color: transparent;
+}
+
+#second_over:hover{
+  color: black;
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+  background-color: silver;
+  opacity: .8;
+  padding-top: 100px;
+  height: 60%;
+  text-align: center;
+}
+
+
+#third_over{
+  padding-top: 100px;
+  height: 50%;
+  text-align: center;
+  color: transparent;
+}
+
+#third_over:hover{
+  color: black;
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+  background-color: silver;
+  opacity: .8;
+  padding-top: 100px;
+  height: 60%;
+  text-align: center;
+}
+
+#first_cat{
+  height: 350px;
+  width: auto;
+  border-radius: 2px solid black;
+}
+
+#second_cat{
+  height: 350px;
+  width: auto;
+}
+
+#third_cat{
+  height: 350px;
+  width: auto;
+}

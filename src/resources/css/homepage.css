@@ -1,0 +1,13 @@
+#carousel{
+    position: relative;
+}
+#carousel_item{
+    height: 300px;
+    background-color: gray;
+    padding: 1em;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bodl;
+    font-size: 2em;
+    color: white;
+    display: none;
+}

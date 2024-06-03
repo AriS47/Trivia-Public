@@ -1,0 +1,249 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+
+
+
+ 
+      <div class="d-flex bg-info mb-5 sticky-top" id="sidebar">
+        <div class="p-2 sticky-top" id="left_side_content" style="overflow: scroll;">
+          <a href="./gameplay"><h5> <u>Categories</u> </h5> </a>
+          <br>
+          <% if(categories_list){
+            categories_list.forEach(function(cat){ %>
+              <li><%= cat %></li>
+            <% });
+          } %>
+
+        </div>
+          <!--right side bar, describing leaderboard-->
+
+
+          
+
+
+
+
+      <div class="container" id="login_con">
+
+          <h1> <u>Log In</u> </h1>
+          <p>
+            Please log in or sign up to enjoy Triviago's premium features!
+          </p>
+            <br /><br /><br /><br />
+          
+          
+          
+          
+            <div class="text-center" >
+            <a
+              href="#myModal1"
+              class="btn btn-info"
+              data-toggle="modal"
+              onclick="openModal()"
+              >Log In</a
+            >
+          </div>
+
+          <br>
+      
+         
+          
+          
+          <div class="text-center">
+            <a
+              href="#myModal"
+              class="btn btn-info"
+              data-toggle="modal"
+              onclick="openModal()">
+              Sign Up Here!
+              </a>
+          </div>
+      </div>
+
+
+    
+    <!-- Button to click to show the modal-->
+
+
+
+
+     
+      
+    <div class="ml-auto p-2" id="right_side_content">
+                  <a href="./leaderboard"><h5> <u>Leaderboard</u> </h5> </a>
+                  <table class="table table-bordered" id="stats_table">
+                    <tr>
+                      <th class="text-center">Rank</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Score</th>
+                    </tr>
+                     <%
+                     if (data) {
+                       var rows = '';
+                       var rank = 1; 
+                       data.forEach(function(item){
+                         rows += '<tr><td>' + rank +'</td><td>' + item.user_name + '</td><td>' + item.score + '</td></tr>';
+                         rank++;
+                       });
+                       %>
+                       <%- rows %>
+                     <% } %>
+                  </table>
+                 
+                </div>
+          </div>
+
+
+          
+
+          /*  */
+
+ <!-- Modal HTML -->
+    <div id="myModal1" class="modal fade">
+      <div class="modal-dialog modal-login">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="avatar">
+              <img
+                src="https://www.tutorialrepublic.com/examples/images/avatar.png"
+                alt="Avatar"
+              />
+            </div>
+            <h4 class="modal-title">Log in</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            
+            <form action="/auth" method="post">
+                
+            
+              <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Username"
+                required="required"
+              >
+            
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                required="required"
+              />
+
+              <input type="submit" value="Login" style="background-color: #001E24;">
+              </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog modal-login">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="avatar">
+              <img
+                src="https://www.tutorialrepublic.com/examples/images/avatar.png"
+                alt="Avatar"
+              />
+            </div>
+            <h4 class="modal-title">Sign Up</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+              
+            <form action="/reg" method="post">
+              
+                <input
+                  id="r_username"
+                  type="text"
+                  name="r_username"
+                  placeholder="Username"
+                  required="required"
+                />
+              
+              <input
+                id="firstname"
+                type="text"
+                name="firstname"
+                placeholder="First Name"
+                required="required"
+              />
+
+              <input
+                id="lastname"
+                type="text"
+                name="lastname"
+                placeholder="Last Name"
+                required="required"
+              />
+
+              <input
+                id="r_password"
+                type="password"
+                name="r_password"
+                placeholder="Password"
+                required="required"
+              />
+
+              <input
+                id="cpsw"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                required="required"
+              />
+              <button id="my_submit_button" type="submit"  class="btn btn-primary btn-block login-btn" disabled onclick="onClickFunction()">
+                  Sign Up
+                </button>
+
+              </form>
+
+          
+            
+          </div>
+          <div class="modal-footer">
+            <div id="message" style="display: block">
+              <h3>Password must contain the following:</h3>
+              <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+              <p id="capital" class="invalid">
+                A <b>capital (uppercase)</b> letter
+              </p>
+              <p id="number" class="invalid">A <b>number</b></p>
+              <p id="match" class="invalid">
+                Password and Confirm Password Match
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <br>
+    
+
+
+<%- include('../partials/footer') %>	

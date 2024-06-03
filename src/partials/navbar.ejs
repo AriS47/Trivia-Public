@@ -1,0 +1,62 @@
+
+  <body>
+
+
+
+    <nav class="navbar">
+
+              <ul class="navbar_logo">
+
+
+                <a href="../"><img src="../resources/images/Sumo Sailors.png" alt="" width="85px"></a>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                   
+                  
+              </div>
+            </ul>
+
+
+              <ul class="navbar_menu">
+                  <li class="navbar_item">
+                      <a href="./gameplay" class="navbar_links">Play Triviago</a>
+                  </li>
+                  <li class="navbar_item">
+                      <a href="../leaderboard" class="navbar_links">Leaderboard</a>
+                  </li>
+
+
+                <% if(!session.username) { %>
+                  <li class="navbar_item">
+                      <a href="../login" class="navbar_links">Log In / Join for free</a>
+                  </li>
+                <%} else { %>
+
+                    <li class="navbar_item">
+                        <a href="../profile" class="navbar_links">My Profile</a>
+                    </li>
+                    <li class="navbar_item">
+                        <a href="../logout" class="navbar_links">Log Out</a>
+                    </li>
+                <%}%>
+
+
+
+
+              </ul>
+
+            <ul class="search">
+
+                <input type="text" placeholder="Search.." height="80px" width="115%">
+
+              
+              
+            </ul>
+            
+
+
+
+
+ </nav>

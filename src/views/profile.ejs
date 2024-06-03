@@ -1,0 +1,109 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+
+
+<div class="d-flex bg-info mb-5 sticky-top" id="sidebar">
+
+
+    <div class="p-2 sticky-top" id="left_side_content" style="overflow: scroll;">
+    <a href="./gameplay"><h5> <u>Categories</u> </h5> </a>
+    <br>
+
+    <% if(categories_list){
+      categories_list.forEach(function(cat){ %>
+        <li><%= cat %></li>
+      <% });
+    } %>
+
+  </div>
+
+
+
+  <div class="container-fluid" id="profile_container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card shadow-sm" id="profile_main">
+          <div class="card-header bg-transparent text-center">
+            <img class="profile_img" src="https://www.tutorialrepublic.com/examples/images/avatar.png" style="height: 75px; border-radius: 50%;  background: #60c7c1; padding: 15px; box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);">
+            <h3><%=session.username%></h3>
+            <h5><%=session.firstname%> <%=session.lastname%></h5>
+          </div>
+          <div class="card-body">
+            <p class="mb-0"><strong class="pr-1">Questions Attempted:</strong>
+              <% if(stats){ %>
+                <%= stats.games_played %>
+              <% } %>
+            </p>
+            <p class="mb-0"><strong class="pr-1">Correct Answers: </strong>
+              <% if(stats){ %>
+                <%= stats.wins %>
+              <% } %>
+            </p>
+            <p class="mb-0"><strong class="pr-1">%Correct: </strong>
+              <%=((stats.wins / stats.games_played) * 100).toFixed(2)%>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card shadow-sm" id="profile_general">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Stats</h3>
+          </div>
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr>
+                <th width="30%">Easy Questions Answered:</th>
+                <td width="2%">:</td>
+                <td><%=stats.easy_ans%></td>
+              </tr>
+              <tr>
+                <th width="30%">Medium Questions Answered:</th>
+                <td width="2%">:</td>
+                <td><%=stats.med_ans%></td>
+              </tr>
+              <tr>
+                <th width="30%">Hard Questions Answered:</th>
+                <td width="2%">:</td>
+                <td><%=stats.hard_ans%></td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+          <div style="height: 26px"></div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="ml-auto p-2" id="right_side_content">
+                  <a href="./leaderboard"><h5> <u>Leaderboard</u> </h5> </a>
+                  <table class="table table-bordered" id="stats_table">
+                    <tr>
+                      <th class="text-center">Rank</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Score</th>
+                    </tr>
+                     <%
+                     if (data) {
+                       var rows = '';
+                       var rank = 1;
+                       data.forEach(function(item){
+                         rows += '<tr><td>' + rank +'</td><td>' + item.user_name + '</td><td>' + item.score + '</td></tr>';
+                         rank++;
+                       });
+                       %>
+                       <%- rows %>
+                     <% } %>
+                  </table>
+
+                </div>
+            </div>
+
+
+
+<%- include('../partials/footer') %>
